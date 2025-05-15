@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produce Transport Loss Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            width: 80%;
+        }
+        button {
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Produce Transport Loss Calculator</h2>
+        <label for="hours">Enter Transport Time (hours):</label><br>
+        <input type="number" id="hours" min="0"><br>
+        <button onclick="calculateLoss()">Calculate</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function calculateLoss() {
+            let hours = document.getElementById("hours").value;
+            
+            // Reference values at harvest
+            let initialWeight = 100; // kg (example)
+            let initialMoisture = 60; // % (example)
+            
+            // Assumed loss rates per hour
+            let weightLossRate = 0.5; // kg lost per hour (example)
+            let moistureLossRate = 0.2; // % moisture lost per hour (example)
+            
+            // Calculations
+            let totalWeightLoss = hours * weightLossRate;
+            let totalMoistureLoss = hours * moistureLossRate;
+
+            // Updated values
+            let finalWeight = initialWeight - totalWeightLoss;
+            let finalMoisture = initialMoisture - totalMoistureLoss;
+
+            document.getElementById("result").innerHTML = `
+                <b>After ${hours} hours of transport:</b><br>
+                - Estimated wasted weight: ${totalWeightLoss.toFixed(2)} kg<br>
+                - Estimated moisture reduced: ${totalMoistureLoss.toFixed(2)}%
+            `;
+        }
+    </script>
+</body>
+</html>
